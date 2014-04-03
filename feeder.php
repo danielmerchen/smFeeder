@@ -1,12 +1,11 @@
 <?php
 // Apparently there is JSON of Available Files. Snag it later.
-Header('Content-type: text/xml');
-
 $xml = new SimpleXMLElement('<xml/>');
 $xml->addAttribute('version', '1.0'); 
 $xml->addAttribute('encoding', 'UTF-8');
 
-$week_start = date('Y-m-d', strtotime('last Sunday')); 													// Start date is in YYYY-MM-DD format, this date will be relative to server time.
+$datestring = strtotime('last Sunday');
+$week_start = date('Y-m-d', $datestring); 													// Start date is in YYYY-MM-DD format, this date will be relative to server time.
 $rebroadcast = array ("00:00","04:00","08:00","12:00","16:00","20:00"); 								// 24 Hour Schedule of Rebroadcast Times, Relative to Account Timezone
 $assets = array ("20140330_1_300k_0003.mp4", "20140330_1_600k_0003.mp4", "20140330_1_1200k_0003.mp4");	// Files to be Assoicated with Events, Does Not Check if they Actually Exist on Service
 $streamname = "simlive1";																				// Stream to push simulated live events to.
@@ -20,6 +19,9 @@ $simlive_day = array(
     "friday" => $rebroadcast,
     "saturday" => $rebroadcast,
 );
+
+Header('Content-type: text/xml');
+Header('Content-Disposition: attachment; filename="'.date('Ymd', $datestring).'_schedule.xml"');
 
 echo '<?xml version="1.0" encoding="UTF-8" ?>'."\r\n"; ?>
 <schedule>
