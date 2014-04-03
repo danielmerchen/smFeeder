@@ -1,9 +1,4 @@
 <?php
-// Apparently there is JSON of Available Files. Snag it later.
-$xml = new SimpleXMLElement('<xml/>');
-$xml->addAttribute('version', '1.0'); 
-$xml->addAttribute('encoding', 'UTF-8');
-
 $datestring = strtotime('last Sunday');
 $week_start = date('Y-m-d', $datestring); 													// Start date is in YYYY-MM-DD format, this date will be relative to server time.
 $rebroadcast = array ("00:00","04:00","08:00","12:00","16:00","20:00"); 								// 24 Hour Schedule of Rebroadcast Times, Relative to Account Timezone
